@@ -36,7 +36,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
             : Text(title!),
         actions: isMobile
             ? [
-                BackdropToggleButton(
+                const BackdropToggleButton(
                   icon: AnimatedIcons.close_menu,
                 )
               ]

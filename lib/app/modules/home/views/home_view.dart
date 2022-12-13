@@ -1,3 +1,5 @@
+import 'package:landsurvey/app/views/charts/bar_chart.dart';
+
 import '../home_imports.dart';
 
 class HomeView extends StatelessWidget {
@@ -17,7 +19,9 @@ class HomeView extends StatelessWidget {
               SPACING_LARGE_HEIGHT,
               TotalPropertySale(),
               SPACING_MEDIUM_HEIGHT,
-              LineChartSample1(),
+              LineChartView(),
+              SPACING_MEDIUM_HEIGHT,
+              BarChartView(),
               SPACING_MEDIUM_HEIGHT,
             ],
           ),
@@ -35,7 +39,9 @@ class HomeView extends StatelessWidget {
               SPACING_LARGE_HEIGHT,
               TotalPropertySale(),
               SPACING_MEDIUM_HEIGHT,
-              LineChartSample1(),
+              LineChartView(),
+              SPACING_MEDIUM_HEIGHT,
+              BarChartView(),
               SPACING_MEDIUM_HEIGHT,
             ],
           ),

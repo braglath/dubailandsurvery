@@ -290,14 +290,14 @@ class _LineChart extends StatelessWidget {
       );
 }
 
-class LineChartSample1 extends StatefulWidget {
-  const LineChartSample1({super.key});
+class LineChartView extends StatefulWidget {
+  const LineChartView({super.key});
 
   @override
-  State<StatefulWidget> createState() => LineChartSample1State();
+  State<StatefulWidget> createState() => LineChartViewState();
 }
 
-class LineChartSample1State extends State<LineChartSample1> {
+class LineChartViewState extends State<LineChartView> {
   late bool isShowingMainData;
 
   @override
@@ -316,43 +316,46 @@ class LineChartSample1State extends State<LineChartSample1> {
           decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(18)),
               color: INPUT_FIELD_GREY),
-          child: Stack(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  SPACING_SMALL_HEIGHT,
+              SPACING_SMALL_HEIGHT,
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SPACING_SMALL_WIDTH,
+                  HoverTextButton(
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          isShowingMainData = !isShowingMainData;
+                        });
+                      },
+                      child: Icon(
+                        Icons.refresh,
+                        color: APP_LIGHT_GREY,
+                      ),
+                    ),
+                  ),
+                  SPACER,
                   Text(
                     'Transaction Report',
                     style: h4_light(context),
                     textAlign: TextAlign.center,
                   ),
-                  SPACING_MEDIUM_HEIGHT,
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 16, left: 6),
-                      child: _LineChart(isShowingMainData: isShowingMainData),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  SPACER,
                 ],
               ),
-              HoverTextButton(
-                child: InkWell(
-                  onTap: () {
-                    setState(() {
-                      isShowingMainData = !isShowingMainData;
-                    });
-                  },
-                  child: Icon(
-                    Icons.refresh,
-                    color: APP_MAIN_GREEN
-                        .withOpacity(isShowingMainData ? 1.0 : 0.5),
-                  ),
+              SPACING_MEDIUM_HEIGHT,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 16, left: 6),
+                  child: _LineChart(isShowingMainData: isShowingMainData),
                 ),
-              )
+              ),
+              const SizedBox(
+                height: 10,
+              ),
             ],
           ),
         ),
