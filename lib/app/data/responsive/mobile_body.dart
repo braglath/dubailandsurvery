@@ -2,7 +2,7 @@ import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 import 'package:landsurvey/app/views/drawer.dart';
 
-class MobileBody extends StatelessWidget {
+class MobileBody extends StatefulWidget {
   final Widget body;
   final PreferredSizeWidget appBar;
   const MobileBody({
@@ -12,10 +12,23 @@ class MobileBody extends StatelessWidget {
   });
 
   @override
+  State<MobileBody> createState() => _MobileBodyState();
+}
+
+class _MobileBodyState extends State<MobileBody> {
+  bool isShowingBackLayer = false;
+  @override
   Widget build(BuildContext context) => BackdropScaffold(
       extendBodyBehindAppBar: true,
-      appBar: appBar,
+      appBar: widget.appBar,
       stickyFrontLayer: true,
       backLayer: const DrawerView(),
-      frontLayer: body);
+      frontLayerShape: RoundedRectangleBorder(
+          borderRadius: isShowingBackLayer
+              ? const BorderRadius.only(
+                  topLeft: Radius.circular(16), topRight: Radius.circular(16))
+              : BorderRadius.zero),
+      onBackLayerRevealed: () => setState(() => isShowingBackLayer = true),
+      onBackLayerConcealed: (() => setState(() => isShowingBackLayer = false)),
+      frontLayer: widget.body);
 }
