@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:landsurvey/app/data/resources/constant_resources.dart';
 
-import '../data/resources/header_resources.dart';
+import '../data/resources/image_resources.dart';
 
 class HeaderImage extends StatelessWidget {
   const HeaderImage({super.key});

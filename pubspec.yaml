@@ -42,6 +42,10 @@ dependencies:
   responsive_framework: ^0.2.0
   fl_chart: ^0.55.2
   backdrop: ^0.8.1
+  intl: ^0.17.0
+  carousel_slider: ^4.2.0
+  syncfusion_flutter_datepicker: ^20.3.61
+  custom_date_range_picker: ^1.0.6
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +72,7 @@ flutter:
   assets:
     - assets/
     - assets/header/
+    - assets/footer/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

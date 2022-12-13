@@ -290,14 +290,14 @@ class _LineChart extends StatelessWidget {
       );
 }
 
-class LineChartView extends StatefulWidget {
-  const LineChartView({super.key});
+class LineChart2View extends StatefulWidget {
+  const LineChart2View({super.key});
 
   @override
-  State<StatefulWidget> createState() => LineChartViewState();
+  State<StatefulWidget> createState() => LineChart2ViewState();
 }
 
-class LineChartViewState extends State<LineChartView> {
+class LineChart2ViewState extends State<LineChart2View> {
   late bool isShowingMainData;
 
   @override
@@ -309,7 +309,7 @@ class LineChartViewState extends State<LineChartView> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 50.0),
+      padding: const EdgeInsets.symmetric(horizontal: 30.0),
       child: AspectRatio(
         aspectRatio: 16 / 9,
         child: DecoratedBox(

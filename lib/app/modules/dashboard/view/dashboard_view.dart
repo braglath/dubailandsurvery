@@ -7,7 +7,7 @@ import '../../../data/responsive/desktop_body.dart';
 import '../../../data/responsive/mobile_body.dart';
 import '../../../data/responsive/responsive_layout.dart';
 import '../../../views/app_bar/common_appbar.dart';
-import '../../../views/charts/line_chart.dart';
+import '../../../views/charts/line_chart2.dart';
 import '../../../views/header_image.dart';
 import '../../../views/header_text.dart';
 
@@ -25,7 +25,7 @@ class DashboardView extends StatelessWidget {
             SPACING_LARGE_HEIGHT,
             TotalPropertySale(),
             SPACING_MEDIUM_HEIGHT,
-            LineChartView(),
+            LineChart2View(),
             SPACING_MEDIUM_HEIGHT,
             BarChartView(),
             SPACING_MEDIUM_HEIGHT,
@@ -41,7 +41,7 @@ class DashboardView extends StatelessWidget {
             SPACING_LARGE_HEIGHT,
             TotalPropertySale(),
             SPACING_MEDIUM_HEIGHT,
-            LineChartView(),
+            LineChart2View(),
             SPACING_MEDIUM_HEIGHT,
             BarChartView(),
             SPACING_MEDIUM_HEIGHT,
