@@ -1,14 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:landsurvey/app/data/resources/color_resources.dart';
-import 'package:landsurvey/app/views/charts/line_chart.dart';
-
-import '../../../data/resources/constant_resources.dart';
-import '../../../data/responsive/desktop_body.dart';
-import '../../../data/responsive/mobile_body.dart';
-import '../../../data/responsive/responsive_layout.dart';
-import '../../../views/common_appbar.dart';
-import '../../../views/header_image.dart';
-import '../../../views/header_text.dart';
+import '../home_imports.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -16,7 +6,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ResponsiveLayout(
       mobileBody: MobileBody(
-        appBar: const CommonAppBar(),
+        appBar: const CommonAppBar(isMobile: true),
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
@@ -34,7 +24,7 @@ class HomeView extends StatelessWidget {
         ),
       ),
       desktopBody: DesktopBody(
-        appBar: const CommonAppBar(),
+        appBar: const CommonAppBar(isMobile: false),
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(

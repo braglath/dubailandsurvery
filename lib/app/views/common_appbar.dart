@@ -1,3 +1,4 @@
+import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
 import 'package:landsurvey/app/data/resources/color_resources.dart';
 import 'package:landsurvey/app/views/hover_animations/hover_text_button.dart';
@@ -6,7 +7,8 @@ import '../data/resources/constant_resources.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
-  const CommonAppBar({super.key, this.title});
+  final bool isMobile;
+  const CommonAppBar({super.key, this.title, required this.isMobile});
 
   static final _appBar = AppBar();
   @override
@@ -32,43 +34,49 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               )
             : Text(title!),
-        actions: [
-          HoverTextButton(
-            child: TextButton(
-                onPressed: () {},
-                child: Text(
-                  'Home',
-                  style: h4_light(context)
-                      ?.copyWith(color: WHITE, fontWeight: FontWeight.normal),
-                )),
-          ),
-          HoverTextButton(
-            child: TextButton(
-                onPressed: () {},
-                child: Text(
-                  'About',
-                  style: h4_light(context)
-                      ?.copyWith(color: WHITE, fontWeight: FontWeight.normal),
-                )),
-          ),
-          HoverTextButton(
-            child: TextButton(
-                onPressed: () {},
-                child: Text(
-                  'Services',
-                  style: h4_light(context)
-                      ?.copyWith(color: WHITE, fontWeight: FontWeight.normal),
-                )),
-          ),
-          HoverTextButton(
-            child: TextButton(
-                onPressed: () {},
-                child: Text(
-                  'Blogs',
-                  style: h4_light(context)
-                      ?.copyWith(color: WHITE, fontWeight: FontWeight.normal),
-                )),
-          ),
-        ],
+        actions: isMobile
+            ? [
+                BackdropToggleButton(
+                  icon: AnimatedIcons.close_menu,
+                )
+              ]
+            : [
+                HoverTextButton(
+                  child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Home',
+                        style: h4_light(context)?.copyWith(
+                            color: WHITE, fontWeight: FontWeight.normal),
+                      )),
+                ),
+                HoverTextButton(
+                  child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Dashboard',
+                        style: h4_light(context)?.copyWith(
+                            color: WHITE, fontWeight: FontWeight.normal),
+                      )),
+                ),
+                HoverTextButton(
+                  child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Services',
+                        style: h4_light(context)?.copyWith(
+                            color: WHITE, fontWeight: FontWeight.normal),
+                      )),
+                ),
+                HoverTextButton(
+                  child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'About',
+                        style: h4_light(context)?.copyWith(
+                            color: WHITE, fontWeight: FontWeight.normal),
+                      )),
+                ),
+              ],
       );
 }

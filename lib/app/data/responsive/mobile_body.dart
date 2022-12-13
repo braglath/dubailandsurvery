@@ -1,4 +1,6 @@
+import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
+import 'package:landsurvey/app/views/drawer.dart';
 
 class MobileBody extends StatelessWidget {
   final Widget body;
@@ -10,9 +12,10 @@ class MobileBody extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    extendBodyBehindAppBar: true,
-        appBar: appBar,
-        body: body,
-      );
+  Widget build(BuildContext context) => BackdropScaffold(
+      extendBodyBehindAppBar: true,
+      appBar: appBar,
+      stickyFrontLayer: true,
+      backLayer: const DrawerView(),
+      frontLayer: body);
 }
