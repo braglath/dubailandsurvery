@@ -16,7 +16,6 @@ class DrawerView extends StatelessWidget {
       return Column(
         children: [
           SPACING_LARGE_HEIGHT,
-          SPACING_LARGE_HEIGHT,
           const DrawerHeader(),
           Expanded(
               child: Container(
@@ -123,9 +122,11 @@ class DrawerPages extends StatelessWidget {
         horizontalTitleGap: 0,
         //? as we are adding login on top we have to minus 1 on index
         onTap: _drawerBody[i].onTap,
-        title: Text(
-          _drawerBody[i].title,
-          style: _drawerBody[i].style,
+        title: Center(
+          child: Text(
+            _drawerBody[i].title,
+            style: _drawerBody[i].style,
+          ),
         ),
       ),
     );

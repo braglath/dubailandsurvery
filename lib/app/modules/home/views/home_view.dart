@@ -51,10 +51,14 @@ class TotalPropertySale extends StatelessWidget {
         children: [
           Text('Total Property Sale Transactions', style: h4_light(context)),
           SPACING_SMALL_HEIGHT,
-          Text(
-            '5,770',
-            style: h1(context)?.copyWith(color: APP_MAIN_GREEN, fontSize: 42),
-          ),
+          TweenAnimationBuilder(
+              curve: Curves.fastOutSlowIn,
+              duration: const Duration(seconds: 2),
+              tween: Tween(begin: 0.0, end: 5770.0),
+              onEnd: () {},
+              builder: (BuildContext context, double value, Widget? child) {
+                return Text(value.toInt().toString(), style: h4_light(context));
+              }),
         ],
       );
 }
