@@ -1,28 +1,34 @@
+import 'package:backdrop/backdrop.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:landsurvey/app/data/resources/constant_resources.dart';
 
 import '../data/resources/color_resources.dart';
+import 'app_bar/cubit/app_bar_cubit.dart';
 
 class DrawerView extends StatelessWidget {
   const DrawerView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SPACING_LARGE_HEIGHT,
-        SPACING_LARGE_HEIGHT,
-        const DrawerHeader(),
-        Expanded(
-            child: Container(
-                decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                        colors: [APP_MAIN_GREEN, WHITE],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter)),
-                child: DrawerBody())),
-      ],
-    );
+    return Builder(builder: (context) {
+      return Column(
+        children: [
+          SPACING_LARGE_HEIGHT,
+          SPACING_LARGE_HEIGHT,
+          const DrawerHeader(),
+          Expanded(
+              child: Container(
+                  decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                          colors: [APP_MAIN_GREEN, WHITE],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter)),
+                  child: const DrawerBody())),
+        ],
+      );
+    });
   }
 }
 
@@ -33,24 +39,56 @@ class DrawerBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentPageState = BlocProvider.of<AppBarCubit>(context);
+
     final List<DrawerBodyModel> drawerBody = <DrawerBodyModel>[
       DrawerBodyModel(
-        title: 'Home',
-        isSelected: false,
-        onTap: () => {},
-      ),
+          title: 'Home',
+          style: currentPageState.state.currentPage == 'home'
+              ? h3_light(context)?.copyWith(
+                  color: APP_DARK_GREY,
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold)
+              : h3_light(context)?.copyWith(color: WHITE),
+          isSelected: false,
+          onTap: () {
+            BlocProvider.of<AppBarCubit>(context)
+                .changePage(context, pageName: 'home');
+          }),
       DrawerBodyModel(
         title: 'Dashboard',
+        style: currentPageState.state.currentPage == 'dashboard'
+            ? h3_light(context)?.copyWith(
+                color: APP_DARK_GREY, fontSize: 26, fontWeight: FontWeight.bold)
+            : h3_light(context)?.copyWith(color: WHITE),
         isSelected: false,
-        onTap: () => {},
+        onTap: () => BlocProvider.of<AppBarCubit>(context)
+            .changePage(context, pageName: 'dashboard'),
       ),
       DrawerBodyModel(
         title: 'Services',
+        style: currentPageState.state.currentPage == 'services'
+            ? h3_light(context)?.copyWith(
+                color: APP_DARK_GREY, fontSize: 26, fontWeight: FontWeight.bold)
+            : h3_light(context)?.copyWith(color: WHITE),
+        isSelected: false,
+        onTap: () => {},
+      ),
+      DrawerBodyModel(
+        title: 'API',
+        style: currentPageState.state.currentPage == 'api'
+            ? h3_light(context)?.copyWith(
+                color: APP_DARK_GREY, fontSize: 26, fontWeight: FontWeight.bold)
+            : h3_light(context)?.copyWith(color: WHITE),
         isSelected: false,
         onTap: () => {},
       ),
       DrawerBodyModel(
         title: 'About',
+        style: currentPageState.state.currentPage == 'about'
+            ? h3_light(context)?.copyWith(
+                color: APP_DARK_GREY, fontSize: 26, fontWeight: FontWeight.bold)
+            : h3_light(context)?.copyWith(color: WHITE),
         isSelected: false,
         onTap: () => {},
       ),
@@ -87,7 +125,7 @@ class DrawerPages extends StatelessWidget {
         onTap: _drawerBody[i].onTap,
         title: Text(
           _drawerBody[i].title,
-          style: h3_light(context)?.copyWith(color: WHITE),
+          style: _drawerBody[i].style,
         ),
       ),
     );
@@ -156,10 +194,12 @@ class NavProfileImage extends StatelessWidget {
 
 class DrawerBodyModel {
   final String title;
+  final TextStyle? style;
   final bool isSelected;
   final Function()? onTap;
   DrawerBodyModel({
     required this.title,
+    required this.style,
     required this.isSelected,
     required this.onTap,
   });

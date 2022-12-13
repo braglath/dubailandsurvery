@@ -1,9 +1,18 @@
+import 'package:flutter/material.dart';
 import 'package:landsurvey/app/views/charts/bar_chart.dart';
 
-import '../home_imports.dart';
+import '../../../data/resources/color_resources.dart';
+import '../../../data/resources/constant_resources.dart';
+import '../../../data/responsive/desktop_body.dart';
+import '../../../data/responsive/mobile_body.dart';
+import '../../../data/responsive/responsive_layout.dart';
+import '../../../views/app_bar/common_appbar.dart';
+import '../../../views/charts/line_chart.dart';
+import '../../../views/header_image.dart';
+import '../../../views/header_text.dart';
 
-class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+class DashboardView extends StatelessWidget {
+  const DashboardView({super.key});
 
   @override
   Widget build(BuildContext context) => ResponsiveLayout(

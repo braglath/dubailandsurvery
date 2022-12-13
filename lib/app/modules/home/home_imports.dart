@@ -6,6 +6,6 @@ export 'package:landsurvey/app/views/charts/line_chart.dart';
 export '../../data/resources/constant_resources.dart';
 export '../../data/responsive/desktop_body.dart';
 export '../../data/responsive/responsive_layout.dart';
-export '../../views/common_appbar.dart';
+export '../../views/app_bar/common_appbar.dart';
 export '../../views/header_image.dart';
 export '../../views/header_text.dart';
