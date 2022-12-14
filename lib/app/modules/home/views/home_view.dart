@@ -24,7 +24,7 @@ class HomeView extends StatelessWidget {
             // ),
             TotalProperty(),
             SPACING_MEDIUM_HEIGHT,
-            Top5Areas(),
+            Top5Areas(isMobile: true),
             SPACING_MEDIUM_HEIGHT,
             LineChart2View(),
             SPACING_MEDIUM_HEIGHT,
@@ -43,7 +43,7 @@ class HomeView extends StatelessWidget {
             SPACING_LARGE_HEIGHT,
             TotalProperty(),
             SPACING_MEDIUM_HEIGHT,
-            Top5Areas(),
+            Top5Areas(isMobile: false),
             SPACING_MEDIUM_HEIGHT,
             LineChart2View(),
             SPACING_MEDIUM_HEIGHT,
@@ -149,7 +149,8 @@ class PropertyTypeModel {
 }
 
 class Top5Areas extends StatelessWidget {
-  const Top5Areas({super.key});
+  final bool isMobile;
+  const Top5Areas({super.key, required this.isMobile});
 
   @override
   Widget build(BuildContext context) {
@@ -205,7 +206,7 @@ class Top5Areas extends StatelessWidget {
             ),
           ),
           SPACING_VSMALL_HEIGHT,
-          Top5AreaSlider(),
+          Top5AreaSlider(isMobile: isMobile),
           SPACING_VSMALL_HEIGHT,
         ],
       ),
@@ -214,7 +215,8 @@ class Top5Areas extends StatelessWidget {
 }
 
 class Top5AreaSlider extends StatefulWidget {
-  const Top5AreaSlider({super.key});
+  final bool isMobile;
+  const Top5AreaSlider({super.key, required this.isMobile});
 
   @override
   State<Top5AreaSlider> createState() => _Top5AreaSliderState();
@@ -225,8 +227,11 @@ class _Top5AreaSliderState extends State<Top5AreaSlider> {
   final CarouselController _controller = CarouselController();
   @override
   Widget build(BuildContext context) {
-    final List<Widget> imageSliders =
-        [1, 2, 3, 4, 5].map((item) => const IndividualLand()).toList();
+    final List<Widget> imageSliders = [1, 2, 3, 4, 5]
+        .map((item) => widget.isMobile
+            ? const IndividualLandMobile()
+            : const IndividualLandDesktop())
+        .toList();
     return Column(
       children: [
         CarouselSlider(
@@ -269,8 +274,8 @@ class _Top5AreaSliderState extends State<Top5AreaSlider> {
   }
 }
 
-class IndividualLand extends StatelessWidget {
-  const IndividualLand({
+class IndividualLandMobile extends StatelessWidget {
+  const IndividualLandMobile({
     Key? key,
   }) : super(key: key);
 
@@ -302,6 +307,55 @@ class IndividualLand extends StatelessWidget {
                       SmallCardModel(text: 'Total Worth', count: '937.72M'))
             ]),
             SPACING_VSMALL_HEIGHT,
+          ],
+        )),
+      ),
+    );
+  }
+}
+
+class IndividualLandDesktop extends StatelessWidget {
+  const IndividualLandDesktop({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+            child: Column(
+          mainAxisSize: MIN,
+          crossAxisAlignment: CROSS_AXIS_CENTER,
+          children: [
+            RichT(text1: 'Region: ', text2: 'Property region comes here'),
+            SPACING_VSMALL_HEIGHT,
+            RichT(
+                text1: 'Description: ',
+                text2: 'This will be property description'),
+            SPACING_SMALL_HEIGHT,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MIN,
+              children: [
+                const Expanded(child: LineChart1View()),
+                SPACING_VSMALL_WIDTH,
+                Column(
+                    mainAxisAlignment: MAIN_AXIS_START,
+                    mainAxisSize: MIN,
+                    children: [
+                      SmallCardView(
+                          smallCardModel: SmallCardModel(
+                              text: 'Total Transactions', count: '385')),
+                      SPACING_SMALL_HEIGHT,
+                      SmallCardView(
+                          smallCardModel: SmallCardModel(
+                              text: 'Total Worth', count: '937.72M')),
+                    ]),
+              ],
+            ),
           ],
         )),
       ),

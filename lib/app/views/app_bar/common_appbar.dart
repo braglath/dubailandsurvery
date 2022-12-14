@@ -4,6 +4,7 @@ import 'package:landsurvey/app/data/resources/color_resources.dart';
 import 'package:landsurvey/app/views/hover_animations/hover_text_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/resources/constant_resources.dart';
+import '../../data/resources/image_resources.dart';
 import 'cubit/app_bar_cubit.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -28,19 +29,34 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
               .withOpacity((scrollOffset / 350).clamp(0, 0.5).toDouble()),
           centerTitle: false,
           title: title == null
-              ? RichText(
-                  text: TextSpan(
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'Real Estate ',
-                        style: h3_dark(context)?.copyWith(color: WHITE),
-                      ),
-                      TextSpan(
-                        text: 'Analytics',
-                        style: h3_light(context)?.copyWith(
-                            color: WHITE, fontWeight: FontWeight.normal),
-                      ),
-                    ],
+              ? AnimatedCrossFade(
+                  alignment: Alignment.centerLeft,
+                  duration: const Duration(milliseconds: 500),
+                  crossFadeState:
+                      (scrollOffset / 350).clamp(0, 1).toDouble() < 0.3
+                          ? CrossFadeState.showFirst
+                          : CrossFadeState.showSecond,
+                  secondChild: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: Image.asset(
+                        Assets.logoWhiteNoBg,
+                        fit: BoxFit.contain,
+                      )),
+                  firstChild: RichText(
+                    text: TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'Real Estate ',
+                          style: h3_dark(context)?.copyWith(color: WHITE),
+                        ),
+                        TextSpan(
+                          text: 'Analytics',
+                          style: h3_light(context)?.copyWith(
+                              color: WHITE, fontWeight: FontWeight.normal),
+                        ),
+                      ],
+                    ),
                   ),
                 )
               : Text(title!),
