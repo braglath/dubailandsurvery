@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:landsurvey/app/data/resources/constant_resources.dart';
+import 'package:landsurvey/app/views/hover_animations/hover_text_button.dart';
 
 import '../data/resources/color_resources.dart';
 import 'app_bar/cubit/app_bar_cubit.dart';
@@ -98,7 +99,8 @@ class DrawerBody extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         itemCount: drawerBody.length,
         itemBuilder: (context, i) {
-          return DrawerPages(drawerBody: drawerBody, i: i);
+          return HoverTextButton(
+              child: DrawerPages(drawerBody: drawerBody, i: i));
         });
   }
 }
@@ -190,6 +192,11 @@ class NavProfileImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => const CircleAvatar(
         radius: 35,
+        backgroundColor: WHITE,
+        child: Icon(
+          Icons.person,
+          color: APP_DARK_GREY,
+        ),
       );
 }
 

@@ -46,6 +46,8 @@ dependencies:
   carousel_slider: ^4.2.0
   syncfusion_flutter_datepicker: ^20.3.61
   custom_date_range_picker: ^1.0.6
+  http: ^0.13.5
+  awesome_snackbar_content: ^0.1.0
 
 dev_dependencies:
   flutter_test:
@@ -57,6 +59,25 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  flutter_launcher_icons: "^0.11.0"
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/thumb_light.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/icons/thumb_light.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "assets/icons/thumb_light.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "assets/icons/thumb_light.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -1,7 +1,7 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:custom_date_range_picker/custom_date_range_picker.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-
-import '../../../data/resources/image_resources.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:landsurvey/app/modules/home/cubit/property_count_cubit.dart';
 import '../../../views/common_footer.dart';
 import '../home_imports.dart';
 
@@ -9,50 +9,88 @@ class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
-  Widget build(BuildContext context) => ResponsiveLayout(
-      mobileBody: MobileBody(
-        body: Column(
-          children: const [
-            HeaderImage(),
-            SPACING_MEDIUM_HEIGHT,
-            HeaderText(),
-            SPACING_LARGE_HEIGHT,
-            // SfDateRangePicker(
-            //   view: DateRangePickerView.year,
-            //   selectionMode: DateRangePickerSelectionMode.range,
-            //   showActionButtons: true,
-            // ),
-            TotalProperty(),
-            SPACING_MEDIUM_HEIGHT,
-            Top5Areas(isMobile: true),
-            SPACING_MEDIUM_HEIGHT,
-            LineChart2View(),
-            SPACING_MEDIUM_HEIGHT,
-            BarChartView(),
-            SPACING_MEDIUM_HEIGHT,
-            CommonFooter(),
-          ],
-        ),
-      ),
-      desktopBody: DesktopBody(
-        body: Column(
-          children: const [
-            HeaderImage(),
-            SPACING_MEDIUM_HEIGHT,
-            HeaderText(),
-            SPACING_LARGE_HEIGHT,
-            TotalProperty(),
-            SPACING_MEDIUM_HEIGHT,
-            Top5Areas(isMobile: false),
-            SPACING_MEDIUM_HEIGHT,
-            LineChart2View(),
-            SPACING_MEDIUM_HEIGHT,
-            BarChartView(),
-            SPACING_MEDIUM_HEIGHT,
-            CommonFooter(),
-          ],
-        ),
-      ));
+  Widget build(BuildContext context) =>
+      BlocListener<PropertyCountCubit, PropertyCountState>(
+        listener: (context, state) {
+          if (state is PropertyCountLoading) {
+            //! TODO: show loading
+            print('property count loading');
+            return;
+          }
+          if (state is PropertyCountOnError) {
+            print('property count error');
+            //? show error Snackbar
+            final snackBar = SnackBar(
+              /// need to set following properties for best effect of awesome_snackbar_content
+              elevation: 0,
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.transparent,
+              content: AwesomeSnackbarContent(
+                title: 'On Snap!',
+                message:
+                    'Error while fetching property count, reloading the page might work',
+
+                /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+                contentType: ContentType.failure,
+              ),
+            );
+
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(snackBar);
+            return;
+          }
+
+          if (state is PropertyCountOnData) {
+            print('property count fetched data');
+            return;
+          }
+        },
+        child: ResponsiveLayout(
+            mobileBody: MobileBody(
+              body: Column(
+                children: const [
+                  HeaderImage(),
+                  SPACING_MEDIUM_HEIGHT,
+                  HeaderText(),
+                  SPACING_LARGE_HEIGHT,
+                  // SfDateRangePicker(
+                  //   view: DateRangePickerView.year,
+                  //   selectionMode: DateRangePickerSelectionMode.range,
+                  //   showActionButtons: true,
+                  // ),
+                  TotalProperty(),
+                  SPACING_MEDIUM_HEIGHT,
+                  Top5Areas(isMobile: true),
+                  SPACING_MEDIUM_HEIGHT,
+                  LineChart2View(),
+                  SPACING_MEDIUM_HEIGHT,
+                  BarChartView(),
+                  SPACING_MEDIUM_HEIGHT,
+                  CommonFooter(),
+                ],
+              ),
+            ),
+            desktopBody: DesktopBody(
+              body: Column(
+                children: const [
+                  HeaderImage(),
+                  SPACING_MEDIUM_HEIGHT,
+                  HeaderText(),
+                  SPACING_LARGE_HEIGHT,
+                  TotalProperty(),
+                  SPACING_MEDIUM_HEIGHT,
+                  Top5Areas(isMobile: false),
+                  SPACING_MEDIUM_HEIGHT,
+                  LineChart2View(),
+                  SPACING_MEDIUM_HEIGHT,
+                  BarChartView(),
+                  SPACING_MEDIUM_HEIGHT,
+                  CommonFooter(),
+                ],
+              ),
+            )),
+      );
 }
 
 class TotalProperty extends StatelessWidget {

@@ -40,7 +40,8 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                       width: 50,
                       height: 50,
                       child: Image.asset(
-                        Assets.logoWhiteNoBg,
+                        Assets.logoThumbLight,
+                        filterQuality: FilterQuality.high,
                         fit: BoxFit.contain,
                       )),
                   firstChild: RichText(

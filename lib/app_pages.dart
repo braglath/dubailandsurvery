@@ -1,6 +1,8 @@
+import 'package:flutter/src/widgets/basic.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:landsurvey/app/modules/dashboard/view/dashboard_view.dart';
+import 'package:landsurvey/app/modules/home/cubit/property_count_cubit.dart';
 import 'package:landsurvey/app/modules/home/views/home_view.dart';
 
 import 'app_routes.dart';
@@ -14,7 +16,14 @@ class AppPages {
       AppRoutes.page(
           path: '/home',
           name: 'home',
-          child: const HomeView(),
+          child: MultiBlocProvider(
+            providers: [
+              BlocProvider<PropertyCountCubit>(
+                create: (context) => PropertyCountCubit(),
+              ),
+            ],
+            child: const HomeView(),
+          ),
           transition: tr.Transition.FadeTransition),
       AppRoutes.page(
           path: '/dashboard',
